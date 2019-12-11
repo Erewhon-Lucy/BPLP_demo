@@ -1,4 +1,4 @@
-多对key放进.ssh之后，若非本地创建的keygen需要以下两步操作
+多对key放进.ssh之后，所有keygen（不管之前在不在）需要以下两步操作
 
 ```
 ssh-agent bash
