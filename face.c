@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <locale.h>
- 
+//编译命令:gcc face.c -lncursesw
 void line()
 {
     for (int i = 0; i < (COLS / 5) ; i++)
@@ -16,7 +16,7 @@ void line()
 
 int main()
 {
-	setlocale(LC_ALL,"");
+	setlocale(LC_ALL,"");//同步终端和窗口的编码格式
     initscr();
 	line();
     move(2,COLS / 2 - 2);
@@ -35,11 +35,11 @@ int main()
     move(15,COLS /2 -5);
     addstr("开始操♂作吧！\n");
     addstr("你的操作：");
-    echo();
+    echo();//启动屏幕响应
 	char ch;
-    while(ch=getch()!='\n')
+    while(ch=getch()!='\n')//留住除了回车所有响应内容
     {
         
     }
-	endwin();
+	endwin();//关闭窗口
 }
