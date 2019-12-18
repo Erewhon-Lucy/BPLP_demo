@@ -3,55 +3,66 @@
 #include <malloc.h>
 #include <stdlib.h>
 
-#define LEN sizeof (struct student)
+#define LEN sizeof(struct student)
 
 struct student
 {
-    char number[20];//用户序号
-    char name[100];//用户姓名
-    char danwei[100];//用户单位
-    char phone[20];//电话号码
-    char home[100];//家庭地址
+    char number[20];  //用户序号
+    char name[100];   //用户姓名
+    char danwei[100]; //用户单位
+    char phone[20];   //电话号码
+    char home[100];   //家庭地址
     struct student *next;
 };
 
 void face(void); /*主菜单函数*/
 void print(struct student *head);
-struct student *append(struct student *head);//增添电子通讯录中的内容，即创建连表过程
-struct student *del(struct student *head);//电子通讯录的维护（删除），通过输入联系人姓名删除联系人数据
-void search(struct student *head);//电子通讯录的查找，关键字为用户姓名；
-void searchByNumber(struct student *head);//电子通讯录的查找，关键字为用户序号；
+struct student *append(struct student *head); //增添电子通讯录中的内容，即创建连表过程
+struct student *del(struct student *head);    //电子通讯录的维护（删除），通过输入联系人姓名删除联系人数据
+void search(struct student *head);            //电子通讯录的查找，关键字为用户姓名；
+void searchByNumber(struct student *head);    //电子通讯录的查找，关键字为用户序号；
 
 void main()
 {
     // FILE *fp1,*fp2;
-    int c;//功能选择需要的号码
+    int c; //功能选择需要的号码
     system("cls");
     //system("color 2f");
     system("cls");
-    struct student *head= NULL;
+    struct student *head = NULL;
 
-    
-        face();
-        printf("选择你需要操作的功能号码:");//改成addstr
-        scanf("%d",&c);
-        getchar();//getch()
-        switch(c)
-        {
-            case 0:head=append(head);break;
-            case 1:print(head);break;
-            case 4:head=del(head);break;
-            case 2:search(head);break;
-            case 3:searchByNumber(head);break;
-            case 5:exit(0);break;//endwin()
-            default :printf("Enter error!!\n");
-        }
-        printf("*****************\n");
-        printf("◇◆请按ENTER返回功能操作菜单◇◆\n");
-        printf("*****************\n");
-        getchar();
-        system("CLS");
-    
+    face();
+    printf("选择你需要操作的功能号码:"); //改成addstr
+    scanf("%d", &c);
+    getchar(); //getch()
+    switch (c)
+    {
+    case 0:
+        head = append(head);
+        break;
+    case 1:
+        print(head);
+        break;
+    case 4:
+        head = del(head);
+        break;
+    case 2:
+        search(head);
+        break;
+    case 3:
+        searchByNumber(head);
+        break;
+    case 5:
+        exit(0);
+        break; //endwin()
+    default:
+        printf("Enter error!!\n");
+    }
+    printf("*****************\n");
+    printf("◇◆请按ENTER返回功能操作菜单◇◆\n");
+    printf("*****************\n");
+    getchar();
+    system("CLS");
 }
 
 void face(void) /*主菜单函数*/
@@ -75,22 +86,22 @@ void face(void) /*主菜单函数*/
 void print(struct student *head)
 {
     struct student *p;
-    p=head;
-    system("CLS");//clear()
+    p = head;
+    system("CLS"); //clear()
     printf("*************************************************************\n");
     printf("==================== → 用 户 信 息 记 录 表 ←===================\n");
     printf("*************************************************************\n");
-    if(head!=NULL)
+    if (head != NULL)
         do
         {
-            printf("用户序号:%s\n",p->number);
-            printf("联系人姓名:%s\n",p->name);
-            printf("用户单位:%s\n",p->danwei);
-            printf("联系人电话号码:%s\n",p->phone);
-            printf("学生地址:%s\n",p->home);
+            printf("用户序号:%s\n", p->number);
+            printf("联系人姓名:%s\n", p->name);
+            printf("用户单位:%s\n", p->danwei);
+            printf("联系人电话号码:%s\n", p->phone);
+            printf("学生地址:%s\n", p->home);
             printf("********************************************************\n");
-            p=p->next;
-        } while (p!=NULL);
+            p = p->next;
+        } while (p != NULL);
     else
     {
         printf("对不起!!没有任何联系人记录!!\n\n");
@@ -101,7 +112,7 @@ void print(struct student *head)
 //增添电子通讯录中的内容，即创建连表过程
 struct student *append(struct student *head)
 {
-    struct student *p0=NULL,*p1,*p2;//p0 为要插入的新节点
+    struct student *p0 = NULL, *p1, *p2; //p0 为要插入的新节点
     p1 = head;
     p2 = head;
     system("CLS");
@@ -120,25 +131,25 @@ struct student *append(struct student *head)
     printf("请输入联系人地址:");
     gets(p0->home);
     //对插入的节点排序，按姓名的拼音顺序
-    if(head == NULL)
+    if (head == NULL)
     {
         head = p0;
         p0->next = NULL;
     }
     else
     {
-        while((strcmp(p0->name, p1->name) > 0) && (p1->next != NULL))
+        while ((strcmp(p0->name, p1->name) > 0) && (p1->next != NULL))
         {
             p2 = p1;
             p1 = p1->next;
         }
-        if((strcmp(p0->name, p1->name)) <= 0)
+        if ((strcmp(p0->name, p1->name)) <= 0)
         {
-            if(head == p1)
-            head = p0;
+            if (head == p1)
+                head = p0;
 
             else
-            p2->next = p0;
+                p2->next = p0;
             p0->next = p1;
         }
         else
@@ -150,13 +161,13 @@ struct student *append(struct student *head)
     printf("恭喜你!!成功添加了联系人信息!!");
     printf("\n************************************************************\n");
     printf("\n\n");
-    return(head);
+    return (head);
 }
 
 //电子通讯录的维护（删除），通过输入联系人姓名删除联系人数据
 struct student *del(struct student *head)
 {
-    struct student *p1,*p2;
+    struct student *p1, *p2;
     char name[100];
     system("CLS");
     printf("\n\n************************************************************\n");
@@ -168,32 +179,32 @@ struct student *del(struct student *head)
     if (head == NULL)
     {
         printf("很抱歉!!没有任何联系人纪录!!\n");
-        printf("\n*******************************************************\n")
-        ;
-        return(head);
+        printf("\n*******************************************************\n");
+        return (head);
     }
-    while(p1 != NULL)
+    while (p1 != NULL)
     {
-        if(strcmp(p1->name,name) == 0)
+        if (strcmp(p1->name, name) == 0)
         {
-            if(p1 == head)
-            head = p1->next;
-            else p2->next = p1->next;
+            if (p1 == head)
+                head = p1->next;
+            else
+                p2->next = p1->next;
             free(p1);
             printf("删除记录成功!!\n");
-            return(head);
+            return (head);
         }
         p2 = p1;
         p1 = p1->next;
     }
     printf("对不起!!没有要删除的联系人纪录!!\n");
-    return(head);
+    return (head);
 }
 
 //电子通讯录的查找，关键字为用户姓名；
 void search(struct student *head)
 {
-    struct student *p1,*p2;
+    struct student *p1, *p2;
     char name[20];
     p1 = head;
     p2 = p1;
@@ -203,9 +214,9 @@ void search(struct student *head)
     printf("**************************************************************\n");
     printf("输入要查找联系人的姓名:");
     gets(name);
-    while(p1 != NULL)
+    while (p1 != NULL)
     {
-        if(strcmp(p1->name, name) == 0)
+        if (strcmp(p1->name, name) == 0)
         {
             printf("联系人序号:");
             puts(p1->number);
@@ -224,15 +235,15 @@ void search(struct student *head)
         p1 = p1->next;
     }
 
-    if(p1 == NULL)
+    if (p1 == NULL)
 
-    printf("对不起!!没有该联系人的纪录!!\n");
+        printf("对不起!!没有该联系人的纪录!!\n");
 }
 
 //电子通讯录的查找，关键字为用户序
 void searchByNumber(struct student *head)
 {
-    struct student *p1,*p2;
+    struct student *p1, *p2;
     char number[20];
     p1 = head;
     p2 = p1;
@@ -242,9 +253,9 @@ void searchByNumber(struct student *head)
     printf("**************************************************************\n");
     printf("输入要查找联系人序号:");
     gets(number);
-    while(p1 != NULL)
+    while (p1 != NULL)
     {
-        if(strcmp(p1->number,number) == 0)
+        if (strcmp(p1->number, number) == 0)
         {
             printf("联系人序号:");
             puts(p1->number);
@@ -260,6 +271,6 @@ void searchByNumber(struct student *head)
         p2 = p1;
         p1 = p1->next;
     }
-    if(p1 == NULL)
-    printf("对不起!!没有该联系人的纪录!!\n");
+    if (p1 == NULL)
+        printf("对不起!!没有该联系人的纪录!!\n");
 }
