@@ -30,11 +30,12 @@ void main()
     //system("color 2f");
     system("cls");
     struct student *head= NULL;
-    {
+
+    
         face();
-        printf("选择你需要操作的功能号码:");
+        printf("选择你需要操作的功能号码:");//改成addstr
         scanf("%d",&c);
-        getchar();
+        getchar();//getch()
         switch(c)
         {
             case 0:head=append(head);break;
@@ -42,7 +43,7 @@ void main()
             case 4:head=del(head);break;
             case 2:search(head);break;
             case 3:searchByNumber(head);break;
-            case 5:exit(0);break;
+            case 5:exit(0);break;//endwin()
             default :printf("Enter error!!\n");
         }
         printf("*****************\n");
@@ -50,7 +51,7 @@ void main()
         printf("*****************\n");
         getchar();
         system("CLS");
-    }
+    
 }
 
 void face(void) /*主菜单函数*/
@@ -75,7 +76,7 @@ void print(struct student *head)
 {
     struct student *p;
     p=head;
-    system("CLS");//调用 DOS 命令 CLS 能够清屏
+    system("CLS");//clear()
     printf("*************************************************************\n");
     printf("==================== → 用 户 信 息 记 录 表 ←===================\n");
     printf("*************************************************************\n");
