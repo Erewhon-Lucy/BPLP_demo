@@ -16,3 +16,11 @@ struct student
     char area[100]; //登录环境
     struct student *next;
 };
+
+void line()//分割线函数
+{
+    for (int i = 0; i < (COLS / 5) ; i++)
+    {
+        addstr(" ^_^ ");
+    }
+}
