@@ -29,7 +29,7 @@ int main()
     addstr("1.记下一个密码\n");
     addstr("2.看看我的密码本\n");
     addstr("3.按账户名找到一个密码\n");
-    addstr("4.按序号查找一个密码\n");
+    addstr("4.按登录环境查找一个密码\n");
     addstr("5.离开没有感情的密码本\n\n");
     line();
     move(15,COLS /2 -5);
