@@ -26,3 +26,22 @@ sudo apt-get install libncurses5 libncursesw5 libncursesw5-dbg libncursesw5-dev
 setlocale(LC_ALL,"");
 ```
 
+新增
+
+Makefile：
+
+框架不用改，需要合并运行的.c程序只需在sources后加上其名字即可
+
+比如，一起编译一个叫做main.c的文件和face.c
+
+```
+sources = face.c main.c
+```
+
+现在的编译指令就是
+
+```
+make
+```
+
+输出文件叫做b
