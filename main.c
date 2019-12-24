@@ -47,16 +47,16 @@ void print(struct student *head)
     if (head != NULL)
         do
         {
-            printw("你的账户名字:%s",p->name);//你的账户名字
-            printw("这个账户的密码:%s\n", p->code);//这个账户的密码
-            printw("密保问题:%s\n", p->answer);//密保问题
-            printw("账户是用来登录这个的:%s\n", p->area);//账户是用来登录这个的
+            printw("你的账户名字:%s",p->name);
+            printw("这个账户的密码:%s\n", p->code);
+            printw("密保问题:%s\n", p->answer);
+            printw("账户是用来登录这个的:%s\n", p->area);
             line();
             p = p->next;
         } while (p != NULL);
     else
     {
-        addstr("你傻了你的密码没保存在这\n\n");//你脑子抽了你的密码没保存在这
+        addstr("你傻了你的密码没保存在这\n\n");
         line();
     }
 }
@@ -74,9 +74,9 @@ void searchByName(struct student *head)
     {
         if (strcmp(p1->name, name) == 0)
         {
-            printw("它的密码是:%s",p1->code);//它的密码是
-            printf("密保问题是:%s",p1->name);//密保问题是
-            printf("它用来登录这个:%s",p1->area);//它用来登录这个
+            printw("它的密码是:%s",p1->code);
+            printf("密保问题是:%s",p1->name);
+            printf("它用来登录这个:%s",p1->area);
             break;
         }
         p2 = p1;
@@ -85,7 +85,7 @@ void searchByName(struct student *head)
 
     if (p1 == NULL)
 
-        printf("醒醒你还没登记过这个账户 !!\n");//醒醒你还没登记过这个账户                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        printf("醒醒你还没登记过这个账户 !!\n");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 }
 
 int main()
@@ -113,7 +113,7 @@ int main()
         searchByArea(head);
         break;
     default:
-        // printf("Enter error!!\n");
+        
     }
     getch();
     endwin();
