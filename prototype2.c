@@ -98,6 +98,7 @@ void print(struct student *head)
             printf("联系人姓名:%s\n", p->name);//这个账户的密码
             printf("用户单位:%s\n", p->danwei);//你把它们存在这里的日期
             printf("联系人电话号码:%s\n", p->phone);//账户是用来登录这个的
+            printf("学生地址:%s\n", p->home);//垃圾密码本不需要这么多结构成员
             // printf("********************************************************\n");
             p = p->next;
         } while (p != NULL);
