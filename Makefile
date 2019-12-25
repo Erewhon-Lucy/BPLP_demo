@@ -1,4 +1,4 @@
-sources = main.c face.c print.c
+sources = main.c 
 ccflags = -Wall -g -fsanitize=address
 CC = gcc
 target = b

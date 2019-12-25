@@ -3,9 +3,10 @@
 void face();
 void print(struct student *head);
 struct student *append(struct student *head); 
-struct student *del(struct student *head);    
+// struct student *del(struct student *head);    
 void searchByName(struct student *head);            
 void searchByArea(struct student *head);
+void sort();
 
 void face()
 {
@@ -75,8 +76,8 @@ void searchByName(struct student *head)
         if (strcmp(p1->name, name) == 0)
         {
             printw("它的密码是:%s",p1->code);
-            printf("密保问题是:%s",p1->name);
-            printf("它用来登录这个:%s",p1->area);
+            printw("密保答案是:%s",p1->answer);
+            printw("它用来登录这个:%s",p1->area);
             break;
         }
         p2 = p1;
@@ -85,16 +86,96 @@ void searchByName(struct student *head)
 
     if (p1 == NULL)
 
-        printf("醒醒你还没登记过这个账户 !!\n");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+        printw("醒醒你还没登记过这个账户 !!\n");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 }
+
+void searchByArea(struct student *head)
+{
+    char area[50];
+    struct student *p1, *p2;
+    p1 = head;
+    p2 = p1;
+    clear();
+    addstr("你要回忆的密码 在哪里登录");
+    line();
+    scanw("%s",&area);
+    while (p1 != NULL)
+    {
+        if (strcmp(p1->area, area) == 0)
+        {
+            printw("它的账户是:%s",p1->name);
+            printw("它的密码是:%s",p1->code);
+            printw("密保答案是:%s",p1->answer);
+            break;
+        }
+        p2 = p1;
+        p1 = p1->next;
+    }
+
+    if (p1 == NULL)
+
+        printw("醒醒你还没登记过这个账户 !!\n");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+}
+
+struct student *append(struct student *head)
+{
+    struct student *p0 = NULL, *p1, *p2; 
+    p1 = head;
+    p2 = head;
+    clear();
+    addstr(" 你能在这里保存你愚蠢脑瓜记不住的密码");
+    line();
+    p0 = (struct student *)malloc(LEN);
+    addstr("你的账户:");
+    scanw("%s",&p0->name);
+    addstr("你的密码:");
+    scanw("%s",p0->code);
+    addstr("密保问题");
+    scanw("%s",&p0->answer);
+    addstr("顺便记一下它在哪登录免得你的憨憨脑子忘记:");
+    scanw("%s",&p0->area);
+    if (head == NULL)
+    {
+        head = p0;
+        p0->next = NULL;
+    }
+    else
+    {
+        while ((strcmp(p0->name, p1->name) > 0) && (p1->next != NULL))
+        {
+            p2 = p1;
+            p1 = p1->next;
+        }
+        if ((strcmp(p0->name, p1->name)) <= 0)
+        {
+            if (head == p1)
+                head = p0;
+
+            else
+                p2->next = p0;
+            p0->next = p1;
+        }
+        else
+        {
+            p1->next = p0;
+            p0->next = NULL;
+        }
+    }
+    printf("恭喜你!!可以从脑子里忘记你的密码了!!");//恭喜你 可以从脑子里忘记你的密码了
+    line();
+    return (head);
+}
+
 
 int main()
 {
     struct student *head = NULL;
-    int input;
+    char input;
     setlocale(LC_ALL,"");
     face();
-    input=getch();
+    scanw("%c",&input);
+    printw("%c",input);
+    getch();
     switch (input)
     {
     case 1:
@@ -104,18 +185,18 @@ int main()
         print(head);
         break;
     case 3:
-        head = del(head);
+        // head = del(head);
         break;
     case 4:
+        printw("%c",input);
         searchByName(head);
         break;
     case 5:
         searchByArea(head);
         break;
-    default:
-        
+    
     }
-    getch();
+    // getch();
     endwin();
     return 0;
 }
