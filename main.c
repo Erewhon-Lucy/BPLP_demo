@@ -6,7 +6,7 @@ struct student *append(struct student *head);
 // struct student *del(struct student *head);    
 void searchByName(struct student *head);            
 void searchByArea(struct student *head);
-void sort();
+void saveToFile(struct student,const char *filename);
 
 void face()
 {
@@ -60,6 +60,7 @@ void print(struct student *head)
         addstr("你傻了你的密码没保存在这\n\n");
         line();
     }
+    getch();
 }
 void searchByName(struct student *head)
 {
@@ -123,16 +124,16 @@ struct student *append(struct student *head)
     p1 = head;
     p2 = head;
     clear();
-    addstr(" 你能在这里保存你愚蠢脑瓜记不住的密码");
+    addstr(" 你能在这里保存你愚蠢脑瓜记不住的密码\n");
     line();
     p0 = (struct student *)malloc(LEN);
-    addstr("你的账户:");
+    addstr("你的账户:\n");
     scanw("%s",&p0->name);
-    addstr("你的密码:");
+    addstr("你的密码:\n");
     scanw("%s",p0->code);
-    addstr("密保问题");
+    addstr("密保问题:\n");
     scanw("%s",&p0->answer);
-    addstr("顺便记一下它在哪登录免得你的憨憨脑子忘记:");
+    addstr("顺便记一下它在哪登录免得你的憨憨脑子忘记:\n");
     scanw("%s",&p0->area);
     if (head == NULL)
     {
@@ -166,15 +167,32 @@ struct student *append(struct student *head)
     return (head);
 }
 
+void saveToFile(struct student,const char *filename)
+{
+    FILE *fp;
+    fp=fopen(filename,"wt");
+    if (fp==NULL)
+    {
+        printf("cannot find %s",filename);
+        exit(1);
+    }
+    nodeptr p= l->head;
+    while (p!=NULL)
+    {
+        fprintf(fp,"%d\n",p->data);
+        p=p->next;
+    }
+    fclose(fp);
+}
 
 int main()
 {
     struct student *head = NULL;
-    char input;
+    int input;
     setlocale(LC_ALL,"");
     face();
-    scanw("%c",&input);
-    printw("%c",input);
+    scanw("%d",&input);
+    printw("%d",input);
     getch();
     switch (input)
     {
@@ -188,7 +206,6 @@ int main()
         // head = del(head);
         break;
     case 4:
-        printw("%c",input);
         searchByName(head);
         break;
     case 5:
@@ -196,7 +213,7 @@ int main()
         break;
     
     }
-    // getch();
+    getch();
     endwin();
     return 0;
 }
