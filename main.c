@@ -6,7 +6,7 @@ struct student *append(struct student *head);
 struct student *del(struct student *head);
 void searchByName(struct student *head);
 void searchByArea(struct student *head);
-void saveToFile(struct student, const char *filename);
+void saveToFile(struct student *head, const char *filename);
 
 void face()
 {
@@ -155,7 +155,7 @@ struct student *append(struct student *head)
 
             else
                 p2->next = p0;
-            p0->next = p1;
+                p0->next = p1;
         }
         else
         {
@@ -205,23 +205,26 @@ struct student *del(struct student *head)
     return (head);
 }
 
-// void saveToFile(struct student,const char *filename)
-// {
-//     FILE *fp;
-//     fp=fopen(filename,"wt");
-//     if (fp==NULL)
-//     {
-//         printf("cannot find %s",filename);
-//         exit(1);
-//     }
-//     nodeptr p= l->head;
-//     while (p!=NULL)
-//     {
-//         fprintf(fp,"%d\n",p->data);
-//         p=p->next;
-//     }
-//     fclose(fp);
-// }
+void saveToFile(struct student *head,const char *filename)
+{
+    FILE *fp;
+    fp=fopen(filename,"wt");
+    if (fp==NULL)
+    {
+        printf("cannot find %s.",filename);
+        exit(1);
+    }
+    while (head!=NULL)
+    {
+        fprintf(fp,"%d\n",head->name);
+        fprintf(fp,"%d\n",head->code);
+        fprintf(fp,"%d\n",head->answer);
+        fprintf(fp,"%d\n",head->area);
+        fprintf("\n");
+        head=head->next;
+    }
+    fclose(fp);
+}
 
 int main()
 {
