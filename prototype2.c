@@ -96,8 +96,9 @@ void print(struct student *head)
         {
             printf("用户序号:%s\n", p->number);//你的账户名字
             printf("联系人姓名:%s\n", p->name);//这个账户的密码
-            printf("用户单位:%s\n", p->danwei);//密保问题
+            printf("用户单位:%s\n", p->danwei);//你把它们存在这里的日期
             printf("联系人电话号码:%s\n", p->phone);//账户是用来登录这个的
+            printf("学生地址:%s\n", p->home);//垃圾密码本不需要这么多结构成员
             // printf("********************************************************\n");
             p = p->next;
         } while (p != NULL);
@@ -123,13 +124,13 @@ struct student *append(struct student *head)
     gets(p0->number);
     printf("请输入联系人姓名:");//你的密码
     gets(p0->name);
-    printf("请输入联系人单位");//密保问题
+    printf("请输入联系人单位");//保存的日期 hint: 后期升级功能 自动从系统获取时间
     gets(p0->danwei);
     printf("请输入联系人电话号码:");//顺便记一下这是个干嘛的账户免得你的憨憨脑子忘记
     gets(p0->phone);
     printf("请输入联系人地址:");//多余了
     gets(p0->home);
-    //不用排序
+    //对插入的节点排序，按姓名的拼音顺序
     if (head == NULL)
     {
         head = p0;
@@ -219,7 +220,7 @@ void search(struct student *head)
         {
             printf("联系人序号:");//它的密码是
             puts(p1->number);
-            printf("联系人姓名:");//密保问题是
+            printf("联系人姓名:");//你在这天保存了它
             puts(p1->name);
             printf("联系人电话号码:");//它用来登录这个
             puts(p1->phone);
@@ -260,7 +261,7 @@ void searchByNumber(struct student *head)
             puts(p1->number);
             printf("联系人姓名:"); //密码是
             puts(p1->name);
-            printf("联系人电话号码:");//密保答案是
+            printf("联系人电话号码:");//在这天保存了它
             puts(p1->phone);
             printf("联系人地址:");
             puts(p1->home);
@@ -282,8 +283,4 @@ void searchByNumber(struct student *head)
     对应的两种查询方式
     通过账户查询
     通过登录环境查询
-<<<<<<< HEAD
 */
-=======
-    */
->>>>>>> dee5a67de236393f945a469aee5bf035c0953bd1
