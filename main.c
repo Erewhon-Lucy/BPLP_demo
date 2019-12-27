@@ -154,8 +154,10 @@ struct student *append(struct student *head)
                 head = p0;
 
             else
+            {
                 p2->next = p0;
                 p0->next = p1;
+            }
         }
         else
         {
@@ -174,12 +176,12 @@ struct student *del(struct student *head)
     struct student *p1, *p2;
     char name[100];
     clear();
-    printw("你哪个号没了？:");//你哪个号没了？
-    scanw("%s",&name);
+    printw("你哪个号没了？:"); //你哪个号没了？
+    scanw("%s", &name);
     p1 = head;
     if (head == NULL)
     {
-        printw("你还没临幸过这个莫得感情的密码本\n");//你还没临幸过这个莫得感情的密码本
+        printw("你还没临幸过这个莫得感情的密码本\n"); //你还没临幸过这个莫得感情的密码本
         line();
         return (head);
     }
@@ -192,7 +194,7 @@ struct student *del(struct student *head)
             else
                 p2->next = p1->next;
             free(p1);
-            printw("恭喜！你号没了!!\n");//你号没了
+            printw("恭喜！你号没了!!\n"); //你号没了
             //save
             getch();
             return (head);
@@ -200,28 +202,28 @@ struct student *del(struct student *head)
         p2 = p1;
         p1 = p1->next;
     }
-    printw("你记错了你根本就没来登记过它\n");//你记错了你根本就没来登记过它
+    printw("你记错了你根本就没来登记过它\n"); //你记错了你根本就没来登记过它
     getch();
     return (head);
 }
 
-void saveToFile(struct student *head,const char *filename)
+void saveToFile(struct student *head, const char *filename)
 {
     FILE *fp;
-    fp=fopen(filename,"wt");
-    if (fp==NULL)
+    fp = fopen(filename, "wt");
+    if (fp == NULL)
     {
-        printf("cannot find %s.",filename);
+        printf("cannot find %s.", filename);
         exit(1);
     }
-    while (head!=NULL)
+    while (head != NULL)
     {
-        fprintf(fp,"%d\n",head->name);
-        fprintf(fp,"%d\n",head->code);
-        fprintf(fp,"%d\n",head->answer);
-        fprintf(fp,"%d\n",head->area);
-        fprintf("\n");
-        head=head->next;
+        fprintf(fp, "%s\n", head->name);
+        fprintf(fp, "%s\n", head->code);
+        fprintf(fp, "%s\n", head->answer);
+        fprintf(fp, "%s\n", head->area);
+        fprintf(fp,"\n");
+        head = head->next;
     }
     fclose(fp);
 }
