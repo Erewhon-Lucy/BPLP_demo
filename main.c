@@ -7,6 +7,7 @@ struct student *del(struct student *head);
 void searchByName(struct student *head);
 void searchByArea(struct student *head);
 void saveToFile(struct student *head, const char *filename);
+void readFromFile(struct student *head, const char *filename);
 
 void face()
 {
@@ -164,7 +165,7 @@ struct student *append(struct student *head)
         }
     }
     printw("恭喜你!!可以从脑子里忘记你的密码了 \n"); //恭喜你 可以从脑子里忘记你的密码了
-    //save
+    saveToFile(head,"1.txt");
     line();
     getch();
     return (head);
@@ -216,11 +217,11 @@ void saveToFile(struct student *head,const char *filename)
     }
     while (head!=NULL)
     {
-        fprintf(fp,"%d\n",head->name);
-        fprintf(fp,"%d\n",head->code);
-        fprintf(fp,"%d\n",head->answer);
-        fprintf(fp,"%d\n",head->area);
-        fprintf("\n");
+        fprintf(fp,"%s\n",head->name);
+        fprintf(fp,"%s\n",head->code);
+        fprintf(fp,"%s\n",head->answer);
+        fprintf(fp,"%s\n",head->area);
+        fprintf(fp,"\n");
         head=head->next;
     }
     fclose(fp);
