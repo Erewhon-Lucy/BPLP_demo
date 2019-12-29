@@ -77,7 +77,7 @@ void searchByName(struct student *head)
     {
         if (strcmp(p1->name, name) == 0)
         {
-            printw("它的密码是:%s\n", p1->code);
+            printw("它的密码是:%s\n", p1->code);           
             printw("密保答案是:%s\n", p1->answer);
             printw("它用来登录这个:%s\n", p1->area);
             getch();
@@ -129,20 +129,22 @@ struct student *append(struct student *head)
     clear();
     addstr(" 你能在这里保存你愚蠢脑瓜记不住的密码\n");
     line();
-    p0 = (struct student *)malloc(LEN);
+    p0 = (struct student *)malloc(LEN);  //p0为暂存新数据的指针
     addstr("你的账户:\n");
-    scanw("%s", &p0->name);
+    scanw("%s", p0->name);
     addstr("你的密码:\n");
     scanw("%s", p0->code);
     addstr("密保问题:\n");
-    scanw("%s", &p0->answer);
+    scanw("%s", p0->answer);
     addstr("顺便记一下它在哪登录免得你的憨憨脑子忘记:\n");
-    scanw("%s", &p0->area);
+    scanw("%s", p0->area);
+    //根据用户名排序
     if (head == NULL)
     {
         head = p0;
         p0->next = NULL;
     }
+    //
     else
     {
         while ((strcmp(p0->name, p1->name) > 0) && (p1->next != NULL))
@@ -153,7 +155,10 @@ struct student *append(struct student *head)
         if ((strcmp(p0->name, p1->name)) <= 0)
         {
             if (head == p1)
+            {   
                 head = p0;
+                head->next=p1;
+            }
 
             else
             {
@@ -162,13 +167,15 @@ struct student *append(struct student *head)
             }
         }
         else
+
         {
             p1->next = p0;
             p0->next = NULL;
         }
     }
+
     printw("恭喜你!!可以从脑子里忘记你的密码了 \n"); //恭喜你 可以从脑子里忘记你的密码了
-    //save
+    saveToFile(head,"1.txt");
     line();
     getch();
     return (head);
@@ -208,6 +215,23 @@ struct student *del(struct student *head)
     getch();
     return (head);
 }
+void list_create_from_file(struct student *head,const char *filename)
+{
+    FILE *fp;
+    fp=fopen(filename,"rt");
+    if (fp==NULL)
+    {
+        printf("cannot find %s.", filename);
+        exit(1);
+    }
+    
+    while (!feof(fp))
+    {
+        fscanf(fp," %s %s %s %s",head->name,head->code,head->answer,head->area);
+    }
+    
+    fclose(fp);
+}
 
 void saveToFile(struct student *head, const char *filename)
 {
@@ -218,15 +242,16 @@ void saveToFile(struct student *head, const char *filename)
         printf("cannot find %s.", filename);
         exit(1);
     }
+    
     while (head != NULL)
     {
         fprintf(fp, "%s\n", head->name);
         fprintf(fp, "%s\n", head->code);
         fprintf(fp, "%s\n", head->answer);
         fprintf(fp, "%s\n", head->area);
-        fprintf(fp,"\n");
-        head = head->next;
+        head=head->next;
     }
+    
     fclose(fp);
 }
 
@@ -234,13 +259,16 @@ int main()
 {
     struct student *head = NULL;
     int input;
+
+    // head = (struct student *)malloc(LEN);
+
     setlocale(LC_ALL, "");
-    //read
-    while (1)
+    // list_create_from_file(head, "1.txt");
+    while (1)   
     {
         face();
         scanw("%d", &input);
-        printw("你的操作是%d", input);
+        printw("%d", input);
         getch();
         switch (input)
         {
@@ -264,6 +292,10 @@ int main()
             endwin();
             return 0;
             break;
+        // case 7:
+        
+        //     break;
+            
         }
         clear();
     }

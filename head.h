@@ -10,9 +10,9 @@
 
 struct student
 {
-    char name[50];  //用户名
-    char code[21];   //密码
-    char answer[5];   //密保答案
+    char name[100];  //用户名
+    char code[100];   //密码
+    char answer[100];   //密保答案
     char area[100]; //登录环境
     struct student *next;
 };
